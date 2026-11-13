@@ -1,67 +1,21 @@
-# Laravel Middleware Starter
+# middleware-app-practice
 
-ミドルウェアハンズオン（10-2-4）用のスターターキットです。
+## 概要
+COACHTECH 教材 Tutorial 10-2「ミドルウェア ハンズオン演習」で作成した成果物です。
+カスタムミドルウエアを作成して管理者専用ページへのアクセス制御を実装しました。
 
-## 含まれているもの
+## 使用技術
+- PHP 8.x
+- Laravel 10.x
+- カスタムミドルウェア
+- Laravel Fortify（認証）
+（**他に使ったものがあれば追記してください**）
 
-- Laravel 10.x + Sail
-- Fortify認証（ログイン / 登録 / ログアウト）
-- Userモデル（is_adminカラム付き）
-- テストユーザー（シーダー）
-  - 管理者: admin@example.com / password
-  - 一般: user@example.com / password
-- AdminController
-- 管理者ページ（/admin）
-
-## セットアップ
-
-```bash
-# クローン
-git clone https://github.com/coachtech-material/laravel-middleware-starter.git middleware-app-sample
-cd laravel-middleware-starter
-
-# 依存関係インストール
-docker run --rm \
-  -u "$(id -u):$(id -g)" \
-  -v "$(pwd):/var/www/html" \
-  -w /var/www/html \
-  -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
-  laravelsail/php82-composer:latest \
-  composer install
-
-# 環境ファイル作成
-cp .env.example .env
-
-# Sail起動
-./vendor/bin/sail up -d
-
-# アプリケーションキー生成
-./vendor/bin/sail artisan key:generate
-
-# マイグレーション・シーダー実行
-./vendor/bin/sail artisan migrate --seed
-```
+## 学んだこと
+- 生成したミドルウエアに管理者でなければ403を返す方法。
+- ミドルウエアにAdminを登録してLarabelで認識。
+- ルートへミドルウェア適用方法　->middleware('admin')
 
 ## 動作確認
+http://localhost/　へアクセスし、用意されていたログイン画面から一般ユーザーでログインし【管理者ページにアクセス】で403が表示されれば成功。
 
-1. http://localhost にアクセス
-2. admin@example.com / password でログイン
-3. 「管理者ページにアクセス」をクリック → 表示される
-4. ログアウトして user@example.com / password でログイン
-5. 「管理者ページにアクセス」をクリック → 表示される（ミドルウェア未実装のため）
-
-## 演習課題
-
-カスタムミドルウェアを作成して、管理者のみが /admin にアクセスできるようにしてください。
-
-## 実装タスク
-
-1. CheckAdminミドルウェアを作成
-2. handleメソッドに管理者チェックロジックを実装
-3. Kernel.phpにミドルウェアを登録
-4. /adminルートにミドルウェアを適用
-
-## 完成後の動作
-
-- admin@example.com でログイン → /admin アクセス → ✅ 表示される
-- user@example.com でログイン → /admin アクセス → ❌ 403エラー
