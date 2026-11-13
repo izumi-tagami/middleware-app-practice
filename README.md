@@ -18,4 +18,4 @@ COACHTECH 教材 Tutorial 10-2「ミドルウェア ハンズオン演習」で�
 
 ## 動作確認
 http://localhost/　へアクセスし、用意されていたログイン画面から一般ユーザーでログインし【管理者ページにアクセス】で403が表示されれば成功。
-
+https://www.awesomescreenshot.com/video/58316186?key=3f380aeaf28573df9bfa45a016bbc6ca
